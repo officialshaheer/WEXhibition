@@ -288,6 +288,19 @@ THREE.PlayerControls = function ( camera, player, domElement ) {
 
 	    }
 
+	// CODE TO UPLOAD Position data to firebase
+	    fbRef.child("Players").child( playerID ).child( "orientation" ).update({
+	    	position: {
+	    		x: this.player.position.x,
+	    		y: this.player.position.y,
+	    		z: this.player.position.z
+	    	},
+	    	rotation: {
+	    		x: this.player.rotation.x,
+	    		y: this.player.rotation.y,
+	    		z: this.player.rotation.z
+	    	}
+	    });
 	};
 
 	function getAutoRotationAngle() { 
