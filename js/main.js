@@ -30,6 +30,11 @@ function init() {
 
 function animate() {
 	requestAnimationFrame( animate );
+
+	if(controls){
+		controls.update();
+	}
+
 	render();
 }
 

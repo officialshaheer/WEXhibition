@@ -1,6 +1,13 @@
+var player;
+
 function loadGame() {
 	// load the environment
 	loadEnvironment();
+
+	// load the player
+	player = new Player( "1" );
+	player.isMainPlayer = true;
+	player.init();
 
 }
 
