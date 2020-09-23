@@ -6,16 +6,19 @@ init();
 animate();
 
 function init() {
-
-	// Basic Setup
-	container = document.getElementById('container');
+	// Setup
+	container = document.getElementById( 'container' );
 
 	scene = new THREE.Scene();
 
-	camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight,1, 1000 );
+	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.z = 5;
 
-	renderer = new THREE.WebGLRenderer( {alpha: true} );
+	renderer = new THREE.WebGLRenderer( { alpha: true} );
 	renderer.setSize( window.innerWidth, window.innerHeight);
+
+	// Load Game world
+	loadGame();
 
 	// Events
 	window.addEventListener("resize", onWindowResize, false);
@@ -26,7 +29,6 @@ function init() {
 }
 
 function animate() {
-
 	requestAnimationFrame( animate );
 	render();
 }
@@ -34,13 +36,12 @@ function animate() {
 function render() {
 
 	renderer.clear();
-	renderer.render(scene,camera);
-	
+	renderer.render( scene, camera );
 }
 
 function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-
-	renderer.setSize( window.innerWidth, window.innerHeight);
+	
+	renderer.setSize( window.innerWidth, window.innerHeight );
 }
