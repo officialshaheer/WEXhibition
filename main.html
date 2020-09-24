@@ -8,10 +8,30 @@
  	<script type="text/javascript" src="js/lib/PlayerControls.js"></script>
  </head>
  <body>
+
+ 	<!-- <div class="loader-container">
+    	<div class="loader"></div>
+	</div>
+ -->
  	<div id="container"></div>
- 	<!-- Adding the external functions in the order it is initialised, otherwise it wont work -->
- 	<script type="text/javascript" src="js/player.js"></script>
- 	<script type="text/javascript" src="js/game.js"></script>
- 	<script type="text/javascript" src="js/main.js"></script>
+
+ 	<!--#111 To make the GLTF Loader work do these -->
+ 	<script src="js/lib/GLTFLoader.js"></script>
+
+ 	<script type="module">
+	
+		import { OrbitControls } from 'https://unpkg.com/three@0.120.1/examples/jsm/controls/OrbitControls.js';
+	    import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/GLTFLoader.js';
+
+	</script>
+	<!--#111 end -->
+	    
+	 	<!-- Adding the external functions in the order it is initialised, otherwise it wont work -->
+	 	<script type="text/javascript" src="js/player.js"></script>
+	 	<script type="text/javascript" src="js/game.js"></script>
+	 	<script type="text/javascript" src="js/main.js"></script>
+
+	
+
  </body>
  </html>

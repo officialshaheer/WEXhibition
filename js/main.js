@@ -3,6 +3,7 @@ var container, scene, camera, renderer;
 var controls;
 
 init();
+
 animate();
 
 function init() {
@@ -11,10 +12,10 @@ function init() {
 
 	scene = new THREE.Scene();
 
-	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
-	camera.position.z = 5;
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.z = 10;
 
-	renderer = new THREE.WebGLRenderer( { alpha: true} );
+	renderer = new THREE.WebGLRenderer( { alpha: false} );
 	renderer.setSize( window.innerWidth, window.innerHeight);
 
 	// Load Game world
@@ -35,6 +36,12 @@ function animate() {
 		controls.update();
 	}
 
+	camera.position.x += -0.01;
+
+	// Particle System Animation
+    var particleSystem = scene.getObjectByName('particleSystem');
+    particleSystem.rotation.y += 0.01;
+
 	render();
 }
 
@@ -50,3 +57,4 @@ function onWindowResize() {
 	
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
+

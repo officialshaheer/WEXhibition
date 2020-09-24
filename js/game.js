@@ -68,8 +68,8 @@ function initMainPlayer(){
 	playerID = fbRef.child("Players").push().key();
 
 	fbRef.child("Players").child( playerID ).child("orientation").set({
-		position: {x:0,y:0,z:0},
-		rotation: {x:0,y:0,z:0}
+		position: {x:0, y:0, z:0},
+		rotation: {x:0, y:0, z:0}
 	});
 
 	player = new Player( playerID );
@@ -78,9 +78,79 @@ function initMainPlayer(){
 }
 
 function loadEnvironment() {
+
 	var sphere_geometry = new THREE.SphereGeometry( 1 );
 	var sphere_material = new THREE.MeshNormalMaterial();
 	var sphere = new THREE.Mesh( sphere_geometry, sphere_material );
 
-	scene.add( sphere );
+	var plane = getPlane(10,50);
+	var pointLight = getPointLight(0.75);
+	pointLight.position.x = 0;
+    pointLight.position.z = 0;
+    pointLight.position.y = 4;
+
+	// Basic Scene
+	// scene.add( sphere ); //disabled for the time being
+
+	scene.add(plane);
+	plane.rotation.x = Math.PI/2;
+	plane.position.y = 0;
+
+	scene.add(pointLight);
+
+	// Main Object
+        let loader = new THREE.GLTFLoader();
+        loader.load('/3dobjects/ust.gltf', function(gltf){
+          var ust = gltf.scene.children[0];
+          gltf.scene.scale.multiplyScalar(1 / 500);
+          gltf.scene.traverse( function( child ){ child.castShadow = true; } );
+          gltf.scene.traverse( function( child ){ child.receiveShadow = true; } );
+          scene.add(gltf.scene);
+        });
+
+    //Particle System
+        var particleGeo = new THREE.SphereGeometry(10, 64, 64);
+        var particleMat = new THREE.PointsMaterial({
+        color: 'rgb(255, 255, 255)',
+        size: 0.01,
+        map: new THREE.TextureLoader().load('/textures/particle.jpg'),
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+        });
+        particleGeo.vertices.forEach(function(vertex) {
+            vertex.x += (Math.random() - 0.9);
+            vertex.y += (Math.random() - 0.9);
+            vertex.z += (Math.random() - 0.9);
+        });
+
+        var particleSystem = new THREE.Points(particleGeo,particleMat);
+        particleSystem.position.y = 0;
+        particleSystem.name = 'particleSystem';
+
+        scene.add(particleSystem);
+        
 }
+
+		// Including Scene objects through functions below
+		// Plane
+        function getPlane(radius,size) {
+            var geometry = new THREE.CircleGeometry(radius, size);
+            var material = new THREE.MeshStandardMaterial({
+                color:'rgb(255,255,255)',
+                side: THREE.DoubleSide,                
+                roughness: 0.0,
+                metalness: 0.0
+            });
+            var mesh = new THREE.Mesh(geometry,material);
+            mesh.receiveShadow = true; // For recieving Shadows
+            return mesh;
+        }
+
+        // Point Light for Shadows 
+        function getPointLight(intensity) {
+            var light = new THREE.PointLight(0xFFFFFF, intensity);
+            light.castShadow = true;
+            return light;
+        }
+   
