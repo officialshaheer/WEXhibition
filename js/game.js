@@ -83,26 +83,133 @@ function loadEnvironment() {
 	var sphere_material = new THREE.MeshNormalMaterial();
 	var sphere = new THREE.Mesh( sphere_geometry, sphere_material );
 
-	var plane = getPlane(10,50);
-	var pointLight = getPointLight(0.75);
+	var plane = getPlane(400,100);
+	var pointLight = getPointLight(2);
 	pointLight.position.x = 0;
     pointLight.position.z = 0;
-    pointLight.position.y = 4;
+    pointLight.position.y = 10;
+
+    // Hemi Light
+ //    hemiLight = new THREE.HemisphereLight( 0xddeeff, 0x0f0e0d, 0.5);
+	// scene.add( hemiLight );
+
+
+	// Floor Material
+	floorMat = new THREE.MeshStandardMaterial( {
+					roughness: 0.8,
+					color: 0xffffff,
+					metalness: 0.2,
+					bumpScale: 0.0005
+				} );
+				var textureLoader = new THREE.TextureLoader();
+				textureLoader.load( "textures/hardwood2_diffuse.jpg", function ( map ) {
+
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 10, 24 );
+					map.encoding = THREE.sRGBEncoding;
+					floorMat.map = map;
+					floorMat.needsUpdate = true;
+
+	} );
+				textureLoader.load( "textures/hardwood2_bump.jpg", function ( map ) {
+
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 10, 24 );
+					floorMat.bumpMap = map;
+					floorMat.needsUpdate = true;
+
+	} );
+				textureLoader.load( "textures/hardwood2_roughness.jpg", function ( map ) {
+
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 10, 24 );
+					floorMat.roughnessMap = map;
+					floorMat.needsUpdate = true;
+
+	} );
+
+				cubeMat = new THREE.MeshStandardMaterial( {
+					roughness: 0.7,
+					color: 0xffffff,
+					bumpScale: 0.002,
+					metalness: 0.2
+				} );
+				textureLoader.load( "textures/brick_diffuse.jpg", function ( map ) {
+
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 1, 1 );
+					map.encoding = THREE.sRGBEncoding;
+					cubeMat.map = map;
+					cubeMat.needsUpdate = true;
+
+	} );
+				textureLoader.load( "textures/brick_bump.jpg", function ( map ) {
+
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 1, 1 );
+					cubeMat.bumpMap = map;
+					cubeMat.needsUpdate = true;
+
+	} );
+	var floorGeometry = new THREE.PlaneBufferGeometry( 400, 400 );
+	var floorMesh = new THREE.Mesh( floorGeometry, floorMat );
+	floorMesh.receiveShadow = true;
+	floorMesh.rotation.x = - Math.PI / 2.0;
+	scene.add( floorMesh );
+
+	// PointBulb
+	var bulbGeometry = new THREE.SphereBufferGeometry( 20, 16, 8 );
+				bulbLight = new THREE.PointLight( 0xffee88, 5, 100, 1 );
+
+				bulbMat = new THREE.MeshStandardMaterial( {
+					emissive: 0xffffee,
+					emissiveIntensity: 1,
+					color: 0x000000
+				} );
+				bulbLight.add( new THREE.Mesh( bulbGeometry, bulbMat ) );
+				bulbLight.position.set( 0, 50, 50);
+				bulbLight.castShadow = true;
+				scene.add( bulbLight );
+
+	var bulbGeometry2 = new THREE.SphereBufferGeometry( 20, 16, 8 );
+				bulbLight2 = new THREE.PointLight( 0xffee88, 5, 100, 1 );
+
+				bulbMat2 = new THREE.MeshStandardMaterial( {
+					emissive: 0xffffee,
+					emissiveIntensity: 1,
+					color: 0x000000
+				} );
+				bulbLight2.add( new THREE.Mesh( bulbGeometry2, bulbMat2 ) );
+				bulbLight2.position.set( 0, 50, -50);
+				bulbLight2.castShadow = true;
+				scene.add( bulbLight2 );			
 
 	// Basic Scene
 	// scene.add( sphere ); //disabled for the time being
 
-	scene.add(plane);
+	// scene.add(plane);
 	plane.rotation.x = Math.PI/2;
 	plane.position.y = 0;
 
-	scene.add(pointLight);
+	// scene.add(pointLight);
 
 	// Main Object
         let loader = new THREE.GLTFLoader();
         loader.load('/3dobjects/ust.gltf', function(gltf){
           var ust = gltf.scene.children[0];
-          gltf.scene.scale.multiplyScalar(1 / 500);
+          gltf.scene.scale.multiplyScalar(1 / 10);
+          gltf.scene.castShadow = true;
+          gltf.scene.receiveShadow = true;
           gltf.scene.traverse( function( child ){ child.castShadow = true; } );
           gltf.scene.traverse( function( child ){ child.receiveShadow = true; } );
           scene.add(gltf.scene);

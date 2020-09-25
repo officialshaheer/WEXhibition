@@ -4,7 +4,7 @@ var Player = function( playerID ) {
 	this.isMainPlayer = false;
 	this.mesh;
 
-	var cube_geometry = new THREE.BoxGeometry (0.2,0.2,0.2);
+	var cube_geometry = new THREE.BoxGeometry (1,1,1);
 	var cube_material = new THREE.MeshBasicMaterial({color: 0x7777ff, wireframe: false});
 
 	var scope = this;
@@ -12,7 +12,9 @@ var Player = function( playerID ) {
 	this.init = function() {
 		scope.mesh = new THREE.Mesh(cube_geometry,cube_material);
 		scene.add(scope.mesh);
-		scope.mesh.position.y = 0.1;
+		scope.mesh.position.x = 250;
+		scope.mesh.position.z = 400;
+		scope.mesh.position.y = 0.5;
 
 		if (scope.isMainPlayer) {
 			// Give player control of this mesh
