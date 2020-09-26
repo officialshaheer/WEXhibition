@@ -134,9 +134,9 @@ THREE.PlayerControls = function ( camera, player, domElement ) {
 
 	this.init = function() {
 
-		this.camera.position.x = this.player.position.x + 10;
+		this.camera.position.x = this.player.position.x + 0;
 		this.camera.position.y = this.player.position.y + 2;
-		this.camera.position.z = this.player.position.z + 10;
+		this.camera.position.z = this.player.position.z + 22;
 
 		this.camera.lookAt( this.player.position );
 		

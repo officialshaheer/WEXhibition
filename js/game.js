@@ -84,14 +84,33 @@ function loadEnvironment() {
 	var sphere = new THREE.Mesh( sphere_geometry, sphere_material );
 
 	var plane = getPlane(400,100);
-	var pointLight = getPointLight(2);
+	var pointLight = getPointLight(0.01);
 	pointLight.position.x = 0;
     pointLight.position.z = 0;
-    pointLight.position.y = 10;
+    pointLight.position.y = 400;
 
     // Hemi Light
  //    hemiLight = new THREE.HemisphereLight( 0xddeeff, 0x0f0e0d, 0.5);
 	// scene.add( hemiLight );
+
+	// Rect Light
+	var rectLight = getRectLight(1,200,200); //Realistic Light
+	function getRectLight(i,w,h) {
+            var rectLight = new THREE.RectAreaLight( 'rgb(255, 255, 255)', i, w, h );
+            rectLight.position.set( 0,100,-50);
+            // rectLight.lookAt( box.position);
+            // rectLight.castShadow = true;
+            return rectLight;
+        }
+
+        scene.add(rectLight);
+
+    var rectLight2 = getRectLight(1,200,200);
+    rectLight2.position.set(0,100,50);
+    rectLight2.rotation.x = Math.PI * -.5;
+    scene.add(rectLight2);
+
+
 
 
 	// Floor Material
@@ -177,7 +196,7 @@ function loadEnvironment() {
 					color: 0x000000
 				} );
 				bulbLight.add( new THREE.Mesh( bulbGeometry, bulbMat ) );
-				bulbLight.position.set( 0, 50, 50);
+				bulbLight.position.set( 0, 50, 60);
 				bulbLight.castShadow = true;
 				scene.add( bulbLight );
 
@@ -190,22 +209,22 @@ function loadEnvironment() {
 					color: 0x000000
 				} );
 				bulbLight2.add( new THREE.Mesh( bulbGeometry2, bulbMat2 ) );
-				bulbLight2.position.set( 0, 50, -50);
+				bulbLight2.position.set( 0, 50, -60);
 				bulbLight2.castShadow = true;
 				scene.add( bulbLight2 );			
 
 	// Basic Scene
 	// scene.add( sphere ); //disabled for the time being
 
-	// scene.add(plane);
+	scene.add(plane);
 	plane.rotation.x = Math.PI/2;
-	plane.position.y = 0;
+	plane.position.y = 0.2;
 
 	// scene.add(pointLight);
 
 	// Main Object
         let loader = new THREE.GLTFLoader();
-        loader.load('/3dobjects/ust.gltf', function(gltf){
+        loader.load('/3dobjects/iust.gltf', function(gltf){
           var ust = gltf.scene.children[0];
           gltf.scene.scale.multiplyScalar(1 / 10);
           gltf.scene.castShadow = true;
@@ -213,6 +232,7 @@ function loadEnvironment() {
           gltf.scene.traverse( function( child ){ child.castShadow = true; } );
           gltf.scene.traverse( function( child ){ child.receiveShadow = true; } );
           scene.add(gltf.scene);
+
         });
 
     //Particle System
@@ -232,11 +252,10 @@ function loadEnvironment() {
         });
 
         var particleSystem = new THREE.Points(particleGeo,particleMat);
-        particleSystem.position.y = 0;
+        particleSystem.position.y = 15;
         particleSystem.name = 'particleSystem';
 
         scene.add(particleSystem);
-        
 }
 
 		// Including Scene objects through functions below
