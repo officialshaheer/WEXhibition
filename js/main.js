@@ -42,6 +42,8 @@ function animate() {
 		controls.update();
 	}
 
+	camera.position.x += 0.01;
+
 	// Particle System Animation
     var particleSystem = scene.getObjectByName('particleSystem');
     particleSystem.rotation.y += 0.01;

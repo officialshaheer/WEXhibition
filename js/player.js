@@ -12,9 +12,9 @@ var Player = function( playerID ) {
 	this.init = function() {
 		scope.mesh = new THREE.Mesh(cube_geometry,cube_material);
 		scene.add(scope.mesh);
-		scope.mesh.position.x = 0;
-		scope.mesh.position.z = 400;
+		scope.mesh.position.x = 185;
 		scope.mesh.position.y = 0.5;
+		scope.mesh.position.z = 0;
 
 		if (scope.isMainPlayer) {
 			// Give player control of this mesh
