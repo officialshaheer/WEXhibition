@@ -1,0 +1,52 @@
+body {
+	margin: 0px;
+	overflow: hidden;
+}
+/*LOADER Styles*/
+.loader-container{
+    width: 100%;
+    height: 100vh;
+    background-color: #111;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader{
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    color: #3498db;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader{
+    25%{
+        color: #2ecc71;
+    }
+    50%{
+        color: #f1c40f;
+    }
+    75%{
+        color: #e74c3c;
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.dev {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    color: black;
+    left:80%;
+    top: 85%;
+    position: fixed;
+    border-radius: 12px;
+    padding-left: 10px;
+    opacity: 0.6;
+}

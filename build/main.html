@@ -1,0 +1,42 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>Mixed Reality - UST Global - Experimental App</title>
+ 	<link rel="stylesheet" href="/build/css/main.css">
+ 	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+ 	<script src="https://threejs.org/build/three.js"></script>
+ 	<script type="text/javascript" src="/build/js/lib/PlayerControls.js"></script>
+ 	
+ </head>
+ <body>
+
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+
+ 	<!-- <div class="loader-container">
+    	<div class="loader">Please wait..</div>
+	</div>
+ -->
+ 	<div id="container"></div>
+
+ 	<!--#111 To make the GLTF Loader work do these -->
+ 	<script src="/build/js/lib/GLTFLoader.js"></script>
+
+ 
+ 	<script type="module">
+
+		import { OrbitControls } from './jsm/controls/OrbitControls.js';
+	    import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/GLTFLoader.js';
+	    
+	    
+	</script>
+	<!--#111 end -->
+	    
+	 	<!-- Adding the external functions in the order it is initialised, otherwise it wont work -->
+	 	<script type="text/javascript" src="/build/js/player.js"></script>
+	 	<script type="text/javascript" src="/build/js/game.js"></script>
+	 	<script type="text/javascript" src="/build/js/main.js"></script>
+
+	<div class="dev">Developed by Shaheer Shahabudeen</div>
+
+ </body>
+ </html>
