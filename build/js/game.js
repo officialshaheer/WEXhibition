@@ -83,21 +83,18 @@ function loadEnvironment() {
 	var sphere_material = new THREE.MeshNormalMaterial();
 	var sphere = new THREE.Mesh( sphere_geometry, sphere_material );
 
-	var plane = getPlane(400,100);
-	var pointLight = getPointLight(0.01);
-	pointLight.position.x = 0;
-    pointLight.position.z = 0;
-    pointLight.position.y = 400;
+	var plane = getPlane(4000,1000);
+	
 
     // Hemi Light
  //    hemiLight = new THREE.HemisphereLight( 0xddeeff, 0x0f0e0d, 0.5);
 	// scene.add( hemiLight );
 
 	// Rect Light
-	var rectLight = getRectLight(1,200,200); //Realistic Light
+	var rectLight = getRectLight(1,2000,2000); //Realistic Light
 	function getRectLight(i,w,h) {
             var rectLight = new THREE.RectAreaLight( 'rgb(255, 255, 255)', i, w, h );
-            rectLight.position.set( 0,100,-50);
+            rectLight.position.set( 0,1000,-600);
             // rectLight.lookAt( box.position);
             // rectLight.castShadow = true;
             return rectLight;
@@ -105,8 +102,8 @@ function loadEnvironment() {
 
     scene.add(rectLight);
 
-    var rectLight2 = getRectLight(1,200,200);
-    rectLight2.position.set(0,100,50);
+    var rectLight2 = getRectLight(1,2000,2000);
+    rectLight2.position.set(0,1000,600);
     rectLight2.rotation.x = Math.PI * -.5;
 
     scene.add(rectLight2);
@@ -114,58 +111,58 @@ function loadEnvironment() {
 
 			    // POST LIGHTs
 			    function getPostLight(i,r) {
-			    		var sphere = new THREE.SphereBufferGeometry( 0.1, 16, 8 );
+			    		var sphere = new THREE.SphereBufferGeometry( 1, 160, 80 );
 			            var postLight1 = new THREE.PointLight( 'rgb(255, 255, 255)', i, r );
 			            postLight1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 'rgb(255, 255, 255)',castShadow: true } ) ) );
 			            return postLight1;
 			        }
 
-				   	var postLight1 = getPostLight(1,10);
-				   	postLight1.position.set(185,6,0);
+				   	var postLight1 = getPostLight(1,100);
+				   	postLight1.position.set(1850,60,0);
 				    scene.add(postLight1);
 
-				    var postLight2 = getPostLight(1,10);
-				   	postLight2.position.set(185,6,40);
+				    var postLight2 = getPostLight(1,100);
+				   	postLight2.position.set(1850,60,400);
 				    scene.add(postLight2);
 
-				    var postLight3 = getPostLight(1,10);
-				   	postLight3.position.set(185,6,80);
+				    var postLight3 = getPostLight(1,100);
+				   	postLight3.position.set(1850,60,800);
 				    scene.add(postLight3);
 
-				    var postLight4 = getPostLight(1,10);
-				   	postLight4.position.set(185,6,120);
+				    var postLight4 = getPostLight(1,100);
+				   	postLight4.position.set(1850,60,1200);
 				    scene.add(postLight4);
 
-				    var postLight5 = getPostLight(1,10);
-				   	postLight5.position.set(185,6,160);
+				    var postLight5 = getPostLight(1,100);
+				   	postLight5.position.set(1850,60,1600);
 				    scene.add(postLight5);
 
-				    var postLight6 = getPostLight(1,10);
-				   	postLight6.position.set(185,6,200);
+				    var postLight6 = getPostLight(1,100);
+				   	postLight6.position.set(1850,60,2000);
 				    scene.add(postLight6);
 
-				    var postLight7 = getPostLight(1,10);
-				   	postLight7.position.set(185,6,240);
+				    var postLight7 = getPostLight(1,100);
+				   	postLight7.position.set(1850,60,2400);
 				    scene.add(postLight7);
 
-				    var postLight8 = getPostLight(1,10);
-				   	postLight8.position.set(185,6,280);
+				    var postLight8 = getPostLight(1,100);
+				   	postLight8.position.set(1850,60,2800);
 				    scene.add(postLight8);
 
-				    var postLight9 = getPostLight(1,10);
-				   	postLight9.position.set(185,6,320);
+				    var postLight9 = getPostLight(1,100);
+				   	postLight9.position.set(1850,60,3200);
 				    scene.add(postLight9);
 
-				    var postLight10 = getPostLight(1,10);
-				   	postLight10.position.set(185,6,360);
+				    var postLight10 = getPostLight(1,100);
+				   	postLight10.position.set(1850,60,3600);
 				    scene.add(postLight10);
 
-				    var postLight11 = getPostLight(1,10);
-				   	postLight11.position.set(185,6,400);
+				    var postLight11 = getPostLight(1,100);
+				   	postLight11.position.set(1850,60,4000);
 				    scene.add(postLight11);
 
-				    var postLight12 = getPostLight(1,10);
-				   	postLight12.position.set(185,6,440);
+				    var postLight12 = getPostLight(1,100);
+				   	postLight12.position.set(1850,60,4400);
 				    scene.add(postLight12);
 
    
@@ -245,8 +242,8 @@ function loadEnvironment() {
 	// scene.add( floorMesh );
 
 	// PointBulb
-	var bulbGeometry = new THREE.SphereBufferGeometry( 20, 16, 8 );
-				bulbLight = new THREE.PointLight( 0xffee88, 5, 100, 2 );
+	var bulbGeometry = new THREE.SphereBufferGeometry( 200, 160, 80 );
+				bulbLight = new THREE.PointLight( 0xffee88, 50, 1000, 20 );
 
 				bulbMat = new THREE.MeshStandardMaterial( {
 					emissive: 0xffffee,
@@ -254,12 +251,12 @@ function loadEnvironment() {
 					color: 0x000000
 				} );
 				// bulbLight.add( new THREE.Mesh( bulbGeometry, bulbMat ) );
-				bulbLight.position.set( 0, 50, 60);
+				bulbLight.position.set( 0, 500, 600);
 				bulbLight.castShadow = true;
-				// scene.add( bulbLight );
+				scene.add( bulbLight );
 
-	var bulbGeometry2 = new THREE.SphereBufferGeometry( 20, 16, 8 );
-				bulbLight2 = new THREE.PointLight( 0xffee88, 5, 100, 2 );
+	var bulbGeometry2 = new THREE.SphereBufferGeometry( 200, 160, 80 );
+				bulbLight2 = new THREE.PointLight( 0xffee88, 50, 1000, 20 );
 
 				bulbMat2 = new THREE.MeshStandardMaterial( {
 					emissive: 0xffffee,
@@ -267,9 +264,9 @@ function loadEnvironment() {
 					color: 0x000000
 				} );
 				// bulbLight2.add( new THREE.Mesh( bulbGeometry2, bulbMat2 ) );
-				bulbLight2.position.set( 0, 50, -60);
+				bulbLight2.position.set( 0, 500, -600);
 				bulbLight2.castShadow = true;
-				// scene.add( bulbLight2 );			
+				scene.add( bulbLight2 );			
 
 	// Basic Scene
 	// scene.add( sphere ); //disabled for the time being
@@ -282,29 +279,28 @@ function loadEnvironment() {
 
 	// Main Object
         let loader = new THREE.GLTFLoader();
-        loader.load('/build/3dobjects/cc.gltf', function(gltf){
+        loader.load('/build/3dobjects/gg.gltf', function(gltf){
           var ust = gltf.scene.children[0];
-          gltf.scene.scale.multiplyScalar(1 / 10);
+          gltf.scene.scale.multiplyScalar(100 / 100);
           gltf.scene.castShadow = true;
           gltf.scene.receiveShadow = true;
-          gltf.scene.traverse( function( child ){ child.castShadow = true; } );
+          gltf.scene.traverse( function( child ){ child.castShadow = true } );
           gltf.scene.traverse( function( child ){ child.receiveShadow = true; } );
           scene.add(gltf.scene);
 
-          if(gltf.scene) {
-          	$(window).on("load",function(){
-          	var flag = 1;
-            $(".loader-container").fadeOut(9000);
-        	});
-          }
+         //  if(flag) {
+         //  	$(window).on("load",function(){
+         //    $(".loader-container").fadeOut(1000);
+        	// });
+         //  }
 
         });
 
     //Particle System
-        var particleGeo = new THREE.SphereGeometry(10, 64, 64);
+        var particleGeo = new THREE.SphereGeometry(6, 128, 128);
         var particleMat = new THREE.PointsMaterial({
         color: 'rgb(255, 255, 255)',
-        size: 0.05,
+        size: 0.15,
         map: new THREE.TextureLoader().load('/build/textures/particle.jpg'),
         transparent: true,
         blending: THREE.AdditiveBlending,
@@ -317,8 +313,10 @@ function loadEnvironment() {
         });
 
         var particleSystem = new THREE.Points(particleGeo,particleMat);
-        particleSystem.position.y = 0;
-        particleSystem.position.z = 400;
+        particleSystem.position.x = 0;
+        particleSystem.position.y = 155;
+        particleSystem.position.z = 4000;
+        particleSystem.scale.set(25,25,25);
         particleSystem.name = 'particleSystem';
 
         scene.add(particleSystem);

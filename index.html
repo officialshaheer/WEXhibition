@@ -72,14 +72,17 @@
 <script src="/js/lib/OrbitControls.js"></script>
 <script src="/js/lib/GLTFLoader.js"></script>
 <script src="/js/lib/threex.domevents.js"></script>
-<!-- <script src="/app/js/server_game_world.js"></script> -->
+
+<script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+
 
 <script type="module">
-    
+    // import {CSS3DRenderer,CSS3DObject} from 'https://threejs.org/examples/js/renderers/CSS3DRenderer.js';
     import { OrbitControls } from 'https://unpkg.com/three@0.120.1/examples/jsm/controls/OrbitControls.js';
     import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/GLTFLoader.js';
 
         var scene = new THREE.Scene();
+        var scene2 = new THREE.Scene();
 
         var plane = getPlane(10,20);
 

@@ -11,7 +11,7 @@ THREE.PlayerControls = function ( camera, player, domElement ) {
 
 	this.center = new THREE.Vector3( player.position.x, player.position.y, player.position.z );
 
-	this.moveSpeed = 0.9;
+	this.moveSpeed = 30;
 	this.turnSpeed = 0.02;
 
 	this.userZoom = true;
@@ -135,8 +135,8 @@ THREE.PlayerControls = function ( camera, player, domElement ) {
 	this.init = function() {
 
 		this.camera.position.x = this.player.position.x + 0;
-		this.camera.position.y = this.player.position.y + 0.5;
-		this.camera.position.z = this.player.position.z + 12;
+		this.camera.position.y = this.player.position.y + 5;
+		this.camera.position.z = this.player.position.z + 120;
 
 		this.camera.lookAt( this.player.position );
 		
@@ -178,8 +178,8 @@ THREE.PlayerControls = function ( camera, player, domElement ) {
 
 		if ( this.autoRotate ) {
 
-			this.camera.position.x += this.autoRotateSpeed * ( ( this.player.position.x + 8 * Math.sin( this.player.rotation.y ) ) - this.camera.position.x );
-			this.camera.position.z += this.autoRotateSpeed * ( ( this.player.position.z + 8 * Math.cos( this.player.rotation.y ) ) - this.camera.position.z );
+			this.camera.position.x += this.autoRotateSpeed * ( ( this.player.position.x + 80 * Math.sin( this.player.rotation.y ) ) - this.camera.position.x );
+			this.camera.position.z += this.autoRotateSpeed * ( ( this.player.position.z + 80 * Math.cos( this.player.rotation.y ) ) - this.camera.position.z );
 
 		} else {
 

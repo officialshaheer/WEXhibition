@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WEXhibition - Experiment by Shaheer </title> 
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+
+</head>
+
+<body>
+
+<div style="left:0%;top:0%;width: 100%;height:7.5%;background-color: transparent;color:white;position: fixed;">
+<h2 style="font-size: 18px;text-align: right;padding-right: 30px;">WEXibition</h2>
+</div>
+<div style="left:0%;top:5%;width: 100%;height:7.5%;background-color: transparent;color:white;position: fixed;">
+<h2 style="font-size: 12px;text-align: right;padding-right: 30px;">UST Global</h2>
+</div>
+
+<div style="width: 110px;height: auto;background-color: transparent;position: fixed;left:90%;top:90%;opacity: 0.8;">
+    <button><a style="color: white;text-decoration:none;" href="https://www.linkedin.com/in/officialshaheer/" target=”_blank”>Connect Me</a></button>
+    
+
+</div>
+
+<div class="floating" style="background-color: transparent;width: 30%;height: auto;left: 5%;top:5%;position:fixed;color:white;font-size: 15px;text-align: justify;
+  text-justify: inter-word;">
+    
+    <h4 style="font-size:18px;">Hello All!</h4>
+    <table style="border: none">
+        <tr><td>
+     WEXhibition is a virtual interactive 3D web application to make real-world activities available on the web browsers for a collaborative experience to the users. It's an experiment done in a 3D model I've created. And thought to bring it up on the web with real-time data rendering on it. At this phase, this project is up and running with the basic idea of collaboration in virtual space. In the future, I'll be working on adding physics properties and activities for flexible and scalable experience. As of now, we have limitations to participate users around 100 at a time in the session since this web app is not deployed on a dedicated server. But you can now experience virtual collaboration on web browsers in a few seconds.  You are welcome to test this version. <br><br>
+     Features to be added : <br>
+     <ul>
+      <li>Virtual Exhibition</li>
+      <li>Treasure Hunt - Team Wise</li>
+      <li>Live Stream - Sports Matches (IPL, Football)</li>
+      <li>Treasure Hunt - Team Wise</li>
+      <li>Football Game</li>
+      <li>And much more..</li>
+    </ul>  
+        </td></tr>
+        <tr><td align="right">
+        Thanks you all!
+        </td></tr>
+        <tr><td align="right">
+        Shaheer Shahabudeen
+        </td></tr>
+        <tr><td align="right">
+        <button style="width:280px" id="lightSwitcher"><span><a style="color: white;text-decoration:none;" href="/build/main.html">Enter</a></span></button>
+        <audio id="bflat" src="/sounds/click.mp3"></audio>
+        </td></tr>
+    </table>  
+
+</div> 
+
+<!-- <div class="loader-container">
+    <div class="loader"></div>
+</div> -->
+
+<div id="css"></div>
+
+
+
+    <!--Loaded this JQuery library for getting values from front-end with its functions to integrate with socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    
+<!-- THREEJS Implementation -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.120.1/build/three.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="/js/lib/OrbitControls.js"></script>
+<script src="/js/lib/GLTFLoader.js"></script>
+<script src="/js/lib/threex.domevents.js"></script>
+
+<script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+
+
+<script type="module">
+
+    import { OrbitControls } from 'https://unpkg.com/three@0.120.1/examples/jsm/controls/OrbitControls.js';
+    import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/GLTFLoader.js';
+
+        var scene = new THREE.Scene();
+
+        var css_renderer;
+
+        // create the plane mesh
+        var css_blend_material = new THREE.MeshBasicMaterial();
+        css_blend_material.color.set('black')
+        css_blend_material.opacity   = 0;
+        css_blend_material.blending  = THREE.NoBlending;
+
+        var css_blend_geometry = new THREE.PlaneGeometry(1,2);
+        var planeMesh = new THREE.Mesh( css_blend_geometry, css_blend_material );
+
+        // add it to the WebGL scene
+        scene.add(planeMesh);
+
+        // CSS Scene
+        var scene2 = new THREE.Scene();
+        
+        // CSS Elements
+            var element = document.createElement( 'div' );
+            element.innerHTML = "<h4>Enter the number</h4>" + "<input type=text/><br>" +"<button><span>Vote</span></button>";
+
+            element.style.background = 'white';
+            element.style.width = 'auto';
+            element.style.height = 'auto';
+            element.style.color = 'black';
+            element.style.textAlign = 'center';
+            element.style.paddingTop = '5px';
+            element.style.borderRadius = '12px';
+            element.style.top = 0;
+            element.style.opacity = 0.999;
+            element.style.Zindex = -1;
+            // element.textContent = "I am editable text!";
+
+            var domCSSObject = new THREE.CSS3DObject( element );
+                domCSSObject.position.set(10,0,0);
+                scene2.add( domCSSObject );
+
+        // Iframe into WebGL
+            //create css3dobject
+            let element2 = document.createElement('iframe');
+            element2.src = [ 'https://www.youtube.com/embed/NMre6IAAAiU', '?rel=0' ].join( '' );  //test url
+            element2.style.frameborder= "0";
+            element2.style.width = '560px';
+            element2.style.height = '315px';
+            let cssObject2 = new THREE.CSS3DObject( element2 );
+            cssObject2.position.set(400, 0, 0);// = child.position;
+            cssObject2.rotation.set( 0, 0, 0);// = child.rotation;
+
+            scene2.add(cssObject2);
+
+            css_renderer = new THREE.CSS3DRenderer();
+            css_renderer.setSize( window.innerWidth, window.innerHeight );
+            css_renderer.domElement.style.position = 'absolute';
+            css_renderer.domElement.style.top = 0;
+
+            // document.querySelector('#css').appendChild( css_renderer.domElement );
+            document.body.appendChild(css_renderer.domElement);
+
+
+        var plane = getPlane(100,200);
+
+        // JQuery to Manipulate the State of Lights in the scene
+        var lightStatusSwitch ;
+
+        // Point lights for shadows and shining surface
+        var pointLight = getPointLight(2);
+        pointLight.position.x = 10;
+        pointLight.position.z = 0;
+        pointLight.position.y = 1;
+
+        // scene.add(pointLight);
+
+        var rectLight1 = getRectLight1(1,20,20); //Realistic Light
+        rectLight1.position.set(0,15,14);
+        rectLight1.rotation.set(12,31,0);
+
+        var rectLight2 = getRectLight2(1,20,20);
+        rectLight2.position.set(0,15,0);
+        rectLight2.rotation.set(12,-31,0);
+
+        var rectLight3 = getRectLight3(1,20,20);
+        rectLight3.position.set(0,1.5,-1.4);
+        rectLight3.rotation.set(1.2,3.1,0);  
+
+        // Add Plane to Scene
+        scene.add(plane);
+        scene.add(rectLight1);
+        scene.add(rectLight2);
+        scene.add(rectLight3);
+        plane.rotation.x = Math.PI/2;
+
+        // Camera 
+        var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,10000)
+        // camera.position.x = 0;
+        // camera.position.y = 2.9;
+        // camera.position.z = 4;
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 4000;
+
+        camera.lookAt(new THREE.Vector3(0,0,0));       
+
+        var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5);
+        scene.add( directionalLight ); 
+
+        // Renderer
+        var renderer = new THREE.WebGLRenderer({alpha:true,antialias: true});
+        renderer.shadowMap.enabled = true; //For Shadows
+        renderer.setClearColor('rgb(0,0,0)');
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // OrbitControls
+        var controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.campingFactor = 0.25;
+        controls.enableZoom = true;
+
+        // Controls for CSS Elements
+        var controls2 = new THREE.OrbitControls(camera, css_renderer.domElement);
+        controls2.enableDamping = true;
+        controls2.campingFactor = 0.25;
+        controls2.enableZoom = true;
+
+        //Particle System
+        var particleGeo = new THREE.SphereGeometry(10, 64, 64);
+        var particleMat = new THREE.PointsMaterial({
+        color: 'rgb(255, 255, 255)',
+        size: 0.04,
+        map: new THREE.TextureLoader().load('/textures/particle.jpg'),
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+        });
+        particleGeo.vertices.forEach(function(vertex) {
+            vertex.x += (Math.random() - 0.5);
+            vertex.y += (Math.random() - 0.5);
+            vertex.z += (Math.random() - 0.5);
+        });
+
+        var particleSystem = new THREE.Points(particleGeo,particleMat);
+        particleSystem.position.y = 0;
+        particleSystem.name = 'particleSystem';
+
+        scene.add(particleSystem);
+
+
+        //Event Handlers for manipulating the scene with click and mouseon mouse over events
+        const domEvents = new THREEx.DomEvents(camera, renderer.domElement);
+
+        // domEvents.addEventListener(particleSystem,'click', event => {
+        //     alert('clicked on 3d object');     
+        // })
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+
+        // Object
+        let loader = new THREE.GLTFLoader();
+        loader.load('/3dobjects/ust.gltf', function(gltf){
+          var ust = gltf.scene.children[0];
+          gltf.scene.scale.multiplyScalar(100 / 100);
+          gltf.scene.traverse( function( child ){ child.castShadow = true; } );
+          gltf.scene.traverse( function( child ){ child.receiveShadow = true; } );
+          scene.add(gltf.scene);
+            // To load everything in scene , till loading the loader icon will show 
+            if(scene.add(gltf.scene)) {
+                $(".loader-container").fadeOut(1000);
+                }
+        });
+        
+        // Functions
+        function getPlane(radius,size) {
+            var geometry = new THREE.CircleGeometry(radius, size);
+            var material = new THREE.MeshStandardMaterial({
+                color:'rgb(255,255,255)',
+                side: THREE.DoubleSide,                
+                roughness: 0.0,
+                metalness: 0.0
+            });
+            var mesh = new THREE.Mesh(geometry,material);
+            mesh.receiveShadow = true; // For recieving Shadows
+            return mesh;
+        }
+
+        function getUserSphere(size,w,h) {
+            var geometry = new THREE.SphereGeometry( size, w, h );
+            var material = new THREE.MeshStandardMaterial( {
+                color: 'rgb(255,2,2)',
+                roughness: 0.0,
+                metalness: 0.0
+                } );
+            var userSphere = new THREE.Mesh( geometry, material );
+            userSphere.castShadow = true;
+            userSphere.position.set(0,0.10,2);
+            return userSphere;
+        }
+
+        // Area Lights in Scene
+        function getRectLight1(i,w,h) {
+            var rectLight1 = new THREE.RectAreaLight( 'rgb(255, 255, 255)', i, w, h );
+            rectLight1.position.set( 0,0,0);
+            return rectLight1;
+        }
+        function getRectLight2(i,w,h) {
+            var rectLight2 = new THREE.RectAreaLight( 'rgb(255, 255, 255)', i, w, h );
+            rectLight2.position.set( 0,0,0);
+            return rectLight2;
+        }
+        function getRectLight3(i,w,h) {
+            var rectLight3 = new THREE.RectAreaLight( 'rgb(255, 255, 255)', i, w, h );
+            rectLight3.position.set( 0,0,0);
+            return rectLight3;
+        }
+
+        function light1On(){
+                scene.add( rectLight1 );
+                lightStatusSwitch = true;
+            }
+
+        function light1Off(){
+                scene.remove( rectLight1 );
+                lightStatusSwitch = false;
+            }
+
+        // Point Light for Shadows 
+        function getPointLight(intensity) {
+            var light = new THREE.PointLight(0xFFFFFF, intensity);
+            light.castShadow = true;
+            return light;
+        }
+
+        // UI Connection for turning on Light
+        var btnForLight = document.getElementById("lightSwitcher");
+        var btnSound = document.getElementById('bflat');
+            btnForLight.addEventListener('click', function() {
+                if (lightStatusSwitch) {
+                    light1Off();
+                    btnSound.play();
+
+                    setTimeout(function(){ 
+                      scene.remove(rectLight2);    
+                      btnSound.play();
+
+                        setTimeout(function(){ 
+                            scene.remove(rectLight3)
+                            btnSound.play(); 
+                        }, 1000); 
+
+                     }, 1000);               
+
+                } else {
+                    light1On();
+                    btnSound.play();
+
+                    setTimeout(function(){ 
+                     scene.add(rectLight2);
+                     btnSound.play();   
+
+                        setTimeout(function(){ 
+                            scene.add(rectLight3);
+                            btnSound.play(); 
+                            }, 1000); 
+
+                     }, 1000);
+
+                }
+            }, true);
+
+        // Initialising renderer & Fixing the resizing of object with below function
+        var render = function() {
+            requestAnimationFrame(render);
+            controls.update();
+            controls2.update();
+            
+            // Particle System Animation
+            var particleSystem = scene.getObjectByName('particleSystem');
+            particleSystem.rotation.y += 0.01;
+
+
+            // camera.position.z += -0.030;
+
+            renderer.render(scene, camera);
+            css_renderer.render( scene2, camera );
+        }
+        render();
+        
+    </script> 
+
+
+
+</body>
+</html>
+

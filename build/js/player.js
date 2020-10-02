@@ -7,19 +7,19 @@ var Player = function( playerID ) {
 	// Box
 	// var cube_geometry = new THREE.BoxGeometry (1,1,1);
 	// var cube_material = new THREE.MeshBasicMaterial({color: 0x7777ff, wireframe: false});
-	var tireGeo = new THREE.CylinderGeometry(0.2, 0.2, 1.5, 16);
+	var tireGeo = new THREE.CylinderGeometry(1, 1, 7.5, 16);
 	var material = new THREE.MeshBasicMaterial({color: 0xccffff, wireframe: true,castShadows: true});
 	var tires = new THREE.Mesh(tireGeo, material);
 	tires.rotation.z = 0.5*Math.PI;
-	tires.position.set(0,-0.58,1);
+	tires.position.set(0,-2.4,5);
 
-	var tire2Geo = new THREE.CylinderGeometry(0.2, 0.2, 1.5, 16);
+	var tire2Geo = new THREE.CylinderGeometry(1, 1, 7.5, 16);
 	var material2 = new THREE.MeshBasicMaterial({color: 0xccffff, wireframe: false});
 	var tires2 = new THREE.Mesh(tire2Geo, material2);
 	tires2.rotation.z = 0.5*Math.PI;
-	tires2.position.set(0,-0.58,-1);
+	tires2.position.set(0,-2.4,-5);
 
-	var boxGeo = new THREE.BoxGeometry (1,1,2.5);
+	var boxGeo = new THREE.BoxGeometry (5,5,12.5);
 	tires.updateMatrix();
 	tires2.updateMatrix();
 
@@ -33,9 +33,9 @@ var Player = function( playerID ) {
           
         scope.mesh = new THREE.Mesh(boxGeo,material);
 		scene.add(scope.mesh);
-		scope.mesh.position.x = 190;
-		scope.mesh.position.y = 0.85;
-		scope.mesh.position.z = 470;
+		scope.mesh.position.x = 1900;
+		scope.mesh.position.y = 4;
+		scope.mesh.position.z = 4700;
 
 		if (scope.isMainPlayer) {
 			// Give player control of this mesh

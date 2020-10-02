@@ -5,18 +5,24 @@
  	<link rel="stylesheet" href="/build/css/main.css">
  	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
  	<script src="https://threejs.org/build/three.js"></script>
+
+	<script src="https://threejs.org/build/three.min.js"></script>
+	<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+ 	<script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+
  	<script type="text/javascript" src="/build/js/lib/PlayerControls.js"></script>
+
  	
  </head>
  <body>
 
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-
- 	<!-- <div class="loader-container">
+<!-- 
+ 	<div class="loader-container">
     	<div class="loader">Please wait..</div>
-	</div>
- -->
- 	<div id="container"></div>
+	</div> -->
+	<!-- <div id="container"></div> -->
+
 
  	<!--#111 To make the GLTF Loader work do these -->
  	<script src="/build/js/lib/GLTFLoader.js"></script>
@@ -35,6 +41,41 @@
 	 	<script type="text/javascript" src="/build/js/player.js"></script>
 	 	<script type="text/javascript" src="/build/js/game.js"></script>
 	 	<script type="text/javascript" src="/build/js/main.js"></script>
+
+	 	<script type="text/javascript">
+	 		
+	 		function myFunction() {
+
+	 			var element2 = document.createElement( 'div' );
+	            element2.innerHTML = '<h4>Thank you!</h4>';
+	            element2.id = 'success';
+	            element2.style.background = '#4CAF50';
+	            element2.style.width = '250px';
+	            element2.style.height = 'auto';
+	            element2.style.color = 'white';
+	            element2.style.textAlign = 'center';
+	            element2.style.paddingTop = '5px';
+	            element2.style.borderRadius = '12px';
+	            element2.style.top = 0;
+	            element2.style.opacity = 0.8;
+
+	            var domCSSObject2 = new THREE.CSS3DObject( element2 );
+	            // domCSSObject.position.set(1900,25,4700);
+	            domCSSObject2.position.set(0,45,0);
+	            domCSSObject2.scale.set(0.15,0.15,0.15);
+	            scene2.add( domCSSObject2 );
+
+	            $('#success').fadeIn('easein');
+
+	            setTimeout(function() {
+	            // alert();
+				$('#success').fadeOut('fast');
+				}, 3000); 
+	 		}
+
+	 	</script>
+
+
 
 	<div class="dev">Developed by Shaheer Shahabudeen</div>
 
