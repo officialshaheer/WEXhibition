@@ -9,6 +9,7 @@
 	<script src="https://threejs.org/build/three.min.js"></script>
 	<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
  	<script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+ 	<script src="https://threejs.org/examples/js/controls/TrackballControls.js"></script>
 
  	<script type="text/javascript" src="/build/js/lib/PlayerControls.js"></script>
 
@@ -16,12 +17,13 @@
  </head>
  <body>
 
+ 	<div id="blocker" style="display: none;"></div>
+
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <!-- 
  	<div class="loader-container">
     	<div class="loader">Please wait..</div>
 	</div> -->
-	<!-- <div id="container"></div> -->
 
 
  	<!--#111 To make the GLTF Loader work do these -->
@@ -31,6 +33,7 @@
  	<script type="module">
 
 		import { OrbitControls } from './jsm/controls/OrbitControls.js';
+		import { TrackballControls } from './jsm/controls/TrackballControls.js';
 	    import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/GLTFLoader.js';
 	    
 	    
@@ -65,12 +68,18 @@
 	            domCSSObject2.scale.set(0.15,0.15,0.15);
 	            scene2.add( domCSSObject2 );
 
-	            $('#success').fadeIn('easein');
+	            hidediv();
 
-	            setTimeout(function() {
+	            function hidediv() {
+				setTimeout(function() {
 	            // alert();
-				$('#success').fadeOut('fast');
+				// $('#success').fadeOut('fast');
+				scene2.remove(domCSSObject2);
 				}, 3000); 
+				
+				}
+	           
+
 	 		}
 
 	 	</script>

@@ -1,7 +1,15 @@
 body {
-	margin: 0px;
+	background-color: #ffffff;
+  margin: 0;
 	overflow: hidden;
 }
+#blocker {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
 /*LOADER Styles*/
 .loader-container{
     width: 100%;
@@ -12,7 +20,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .loader{
     width: 20px;
     height: 20px;

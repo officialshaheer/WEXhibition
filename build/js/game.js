@@ -279,7 +279,7 @@ function loadEnvironment() {
 
 	// Main Object
         let loader = new THREE.GLTFLoader();
-        loader.load('/build/3dobjects/gg.gltf', function(gltf){
+        loader.load('/build/3dobjects/ustfinal.gltf', function(gltf){
           var ust = gltf.scene.children[0];
           gltf.scene.scale.multiplyScalar(100 / 100);
           gltf.scene.castShadow = true;
